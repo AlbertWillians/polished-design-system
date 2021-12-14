@@ -1,4 +1,5 @@
-import { ElementType, MouseEventHandler, ReactNode } from 'react';
+import React, { ElementType, MouseEventHandler, ReactNode } from 'react';
+import { StyledButton } from './styled';
 
 export type ButtonType = 'default' | 'danger' | 'ghost' | 'secondary';
 
@@ -73,7 +74,7 @@ const Button: React.ForwardRefRenderFunction<unknown, ButtonProps> = (props, ref
          <StyledButton
             as='a'
             href={href}
-            ref={ref}
+            ref={ref as React.MutableRefObject<HTMLAnchorElement>}
             className={className}
             {...styles}
          >
@@ -87,7 +88,7 @@ const Button: React.ForwardRefRenderFunction<unknown, ButtonProps> = (props, ref
          as='button'
          type='button'
          onClick={onClick}
-         ref={ref}
+         ref={ref as React.MutableRefObject<HTMLButtonElement>}
          className={className}
          {...styles}
       >
@@ -95,3 +96,5 @@ const Button: React.ForwardRefRenderFunction<unknown, ButtonProps> = (props, ref
       </StyledButton>
    )
 }
+
+export default React.forwardRef<unknown, ButtonProps>(Button);
